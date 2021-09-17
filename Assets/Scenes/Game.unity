@@ -411,6 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 193841692}
   - component: {fileID: 193841693}
+  - component: {fileID: 193841694}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -430,7 +431,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &193841693
 MonoBehaviour:
@@ -444,7 +445,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6954b71fec0488b42885c1ed3c9868c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 0}
+--- !u!114 &193841694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193841691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb2ddd473aef354bae4105e9f70b472, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_rupees: []
+  spawner: {fileID: 1229224046}
 --- !u!1001 &210003538
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1103,7 +1117,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &521713575 stripped
 Transform:
@@ -2013,7 +2027,7 @@ GameObject:
   - component: {fileID: 1229224044}
   - component: {fileID: 1229224043}
   m_Layer: 6
-  m_Name: Spawn
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2098,7 +2112,6 @@ MonoBehaviour:
   container: {fileID: 7422836}
   rupee: {fileID: 6762731940797027063, guid: f0717c27021df3443a6faf787eb4a323, type: 3}
   delay: 2
-  m_rupees: []
 --- !u!1001 &1241695471
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class Controller : MonoBehaviour
 
     [Range(0f, 5f)]
     public float speed = 1; 
+    
     void Awake()
     {
         m_body = GetComponent<Rigidbody2D>();

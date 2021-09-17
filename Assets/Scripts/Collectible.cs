@@ -9,7 +9,7 @@ public class Collectible : MonoBehaviour
 
     public event EventHandler<EventArgs> Collected;
 
-    void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
         if(col.gameObject.CompareTag(collectorTags))
         {
@@ -18,7 +18,7 @@ public class Collectible : MonoBehaviour
         }
     }
 
-    protected virtual void OnCollected()
+    private void OnCollected()
     {
         Collected?.Invoke(this, EventArgs.Empty);
     }
