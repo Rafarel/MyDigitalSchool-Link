@@ -31,7 +31,8 @@ public class RupeesManager : MonoBehaviour
     private void CollectedHandler(object sender, EventArgs args)
     {
         // Get the sender as Collectible instance
-        Rupee rupee = (sender as GameObject)?.GetComponent<Rupee>();
+        Collectible c = sender as Collectible;
+        Rupee rupee = c.GetComponent<Rupee>();
 
         if (rupee)
         {
