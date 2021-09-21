@@ -17,6 +17,6 @@ public class MoveRandom : MonoBehaviour
         int x = Random.value < 0.5f ? -1 : 1;
         int y = Random.value < 0.5f ? -1 : 1;
         Vector2 velocity = new Vector2(x, y);
-        m_body.velocity = velocity * speed;
+        m_body.velocity = velocity.normalized * speed;
     }
 }
