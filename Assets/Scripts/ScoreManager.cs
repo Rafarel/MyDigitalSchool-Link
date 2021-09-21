@@ -7,6 +7,15 @@ public class ScoreManager : MonoBehaviour
     private GameManager m_Game;
     public int Value { get; private set; }
 
+    private const string BEST = "best-score";
+
+    public int Best
+    {
+        get => PlayerPrefs.GetInt(BEST, 0);
+
+        set => PlayerPrefs.SetInt(BEST, value);
+    }
+
     public event EventHandler<EventArgs> Changed;
     
     private void Awake()
