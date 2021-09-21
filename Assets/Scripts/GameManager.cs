@@ -8,7 +8,11 @@ public class GameManager : MonoBehaviour
     public RupeesManager Rupees { get; private set; }
     
     public ScoreManager Score { get; private set; }
-
+    
+    public UIManager UI { get; private set; }
+    
+    public TimeManager Time { get; private set;  }
+    
     public int scoreToWin;
 
     private void Awake()
@@ -24,6 +28,12 @@ public class GameManager : MonoBehaviour
 
         Rupees = GetComponent<RupeesManager>();
         Score = GetComponent<ScoreManager>();
+        UI = GetComponent<UIManager>();
+        Time = GetComponent<TimeManager>();
+
+        Score.Changed += ScoreChangedHandler;
+        Time.Completed += TimeCompletedHandler;
+    }
 
 
         Score.Changed += ScoreChangedHandler;
@@ -37,5 +47,9 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("Game Win!");
         }
+    }
+
+    private void TimeCompletedHandler(object sender, EventArgs args)
+    {
     }
 }
