@@ -9,4 +9,6 @@ public class RupeeData : ScriptableObject
     public AudioClip sound;
 
     public int score;
+    
+    public float speedBonus;
 }

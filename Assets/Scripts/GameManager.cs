@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     
     public AudioManager Audio { get; private set;  }
     
+    public PlayerManager Player { get; private set;  }
+    
     public bool Playing { get; private set; }
 
     public int scoreToWin;
@@ -35,6 +37,7 @@ public class GameManager : MonoBehaviour
         UI = GetComponent<UIManager>();
         Time = GetComponent<TimeManager>();
         Audio = GetComponent<AudioManager>();
+        Player = GetComponent<PlayerManager>();
 
         Score.Changed += ScoreChangedHandler;
         Time.Completed += TimeCompletedHandler;

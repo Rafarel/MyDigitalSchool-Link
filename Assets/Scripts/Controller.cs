@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Controller : MonoBehaviour
 {
@@ -6,8 +7,23 @@ public class Controller : MonoBehaviour
     private Animator m_animator;
     private SpriteRenderer m_renderer;
 
-    [Range(0f, 5f)]
-    public float speed = 1; 
+    private float m_Speed;
+    
+    public float Speed
+    {
+        get => m_Speed;
+
+        set
+        {
+            m_Speed = Mathf.Clamp(value, minSpeed, maxSpeed);
+        }
+    }
+
+    public float minSpeed = 1;
+
+    public float maxSpeed = 5;
+
+    public float speedDecreaseRate; 
     
     void Awake()
     {
@@ -22,7 +38,7 @@ public class Controller : MonoBehaviour
         float translationY = Input.GetAxis("Vertical");
         Vector2 translation = new Vector2(translationX, translationY); 
 
-        m_body.velocity = translation * speed;
+        m_body.velocity = translation * Speed;
         m_animator.SetFloat("translationX", translationX);
         m_animator.SetFloat("translationY", translationY);
 
@@ -30,5 +46,7 @@ public class Controller : MonoBehaviour
         {
             m_renderer.flipX = translationX < 0;
         }
+
+        Speed -= speedDecreaseRate;
     }
 }

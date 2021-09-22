@@ -15,3 +15,4 @@ MonoBehaviour:
   color: {r: 1, g: 0.96142375, b: 0, a: 1}
   sound: {fileID: 8300000, guid: 6baf52e452a1d684aa6e05fadffb3017, type: 3}
   score: 20
+  speedBonus: 3
