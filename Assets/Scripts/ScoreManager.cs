@@ -5,6 +5,8 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     private GameManager m_Game;
+
+    public AudioClip bestScoreClip;
     public int Value { get; private set; }
 
     private const string BEST = "best-score";
@@ -46,6 +48,7 @@ public class ScoreManager : MonoBehaviour
         if (score > Best)
         {
             Best = score;
+            AudioSource.PlayClipAtPoint(bestScoreClip, Vector3.zero);
         }
     }
 
