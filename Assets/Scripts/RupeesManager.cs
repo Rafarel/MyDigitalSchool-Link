@@ -13,7 +13,7 @@ public class RupeesManager : MonoBehaviour
     public Transform container;
     
     public Rupee rupeePrefab;
-    
+
     [Range(0.1f, 10)]
     public float delay = 2f;
 
