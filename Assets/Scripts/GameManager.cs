@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     
     public TimeManager Time { get; private set;  }
     
+    public AudioManager Audio { get; private set;  }
+    
     public bool Playing { get; private set; }
 
     public int scoreToWin;
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
         Score = GetComponent<ScoreManager>();
         UI = GetComponent<UIManager>();
         Time = GetComponent<TimeManager>();
+        Audio = GetComponent<AudioManager>();
 
         Score.Changed += ScoreChangedHandler;
         Time.Completed += TimeCompletedHandler;
@@ -43,6 +46,7 @@ public class GameManager : MonoBehaviour
         Score.Reset();
         Time.StartCountdown();
         Rupees.StartSpawning();
+        Audio.PlayMainTheme();
     }
 
     private void StopGame()
@@ -51,6 +55,7 @@ public class GameManager : MonoBehaviour
         Rupees.StopSpawning();
         Rupees.Clear();
         Score.SubmitScore(Score.Value);
+        Audio.Stop();
     }
 
     private void ScoreChangedHandler(object sender, EventArgs args)
