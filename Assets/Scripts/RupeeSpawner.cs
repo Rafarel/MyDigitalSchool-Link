@@ -11,7 +11,7 @@ public class RupeeSpawner : MonoBehaviour
     
     public Rupee rupeePrefab;
     
-    [Range(1, 10)]
+    [Range(0.1f, 10)]
     public float delay = 2f;
 
     public List<RupeeData> rupeeData;

@@ -11,7 +11,7 @@ public class Collectible : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.CompareTag(collectorTags))
+        if (col.gameObject.CompareTag(collectorTags))
         {
             OnCollected();
             if (autoDestroy) Destroy(gameObject);

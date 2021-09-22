@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RupeeGreen
   m_EditorClassIdentifier: 
   color: {r: 0, g: 1, b: 0.00002193451, a: 1}
-  sound: {fileID: 0}
+  sound: {fileID: 8300000, guid: a16abbebd4cca414c959124a84398878, type: 3}
   score: 1

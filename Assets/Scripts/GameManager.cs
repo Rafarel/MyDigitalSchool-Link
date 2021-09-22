@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         Playing = true;
+        Score.Reset();
         Time.StartCountdown();
         Rupees.StartSpawning();
     }
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
         Playing = false;
         Rupees.StopSpawning();
         Rupees.Clear();
+        Score.SubmitScore(Score.Value);
     }
 
     private void ScoreChangedHandler(object sender, EventArgs args)

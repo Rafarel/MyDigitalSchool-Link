@@ -25,14 +25,27 @@ public class ScoreManager : MonoBehaviour
         m_Game.Rupees.RupeeCollected += RupeeCollectedHandler;
     }
 
+    public void Reset()
+    {
+        Value = 0;
+    }
+
     private void RupeeCollectedHandler(object sender, RupeeEvent e)
     {
         Rupee rupee = e.Rupee;
 
         if (rupee)
         {
-            Value += rupee.Score;
+            Value += rupee.Data.score;
             OnChanged();
+        }
+    }
+
+    public void SubmitScore(int score)
+    {
+        if (score > Best)
+        {
+            Best = score;
         }
     }
 

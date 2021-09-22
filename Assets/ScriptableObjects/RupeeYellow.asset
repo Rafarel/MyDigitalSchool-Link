@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c198afda83be01749b990963ba12b090, type: 3}
-  m_Name: RupeeBlue
+  m_Name: RupeeYellow
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0.09286618, b: 1, a: 1}
-  sound: {fileID: 8300000, guid: 4f3bcbdff077733468554fbb33e9159e, type: 3}
-  score: 5
+  color: {r: 1, g: 0.96142375, b: 0, a: 1}
+  sound: {fileID: 8300000, guid: 6baf52e452a1d684aa6e05fadffb3017, type: 3}
+  score: 20
