@@ -1,51 +1,87 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RupeesManager : MonoBehaviour
 {
-    private List<Rupee> m_rupees = new List<Rupee>();
+    private readonly List<Rupee> m_Rupees = new List<Rupee>();
 
-    public RupeeSpawner spawner;
+    public Transform spawner;
+    
+    public Transform container;
+    
+    public Rupee rupeePrefab;
+    
+    [Range(0.1f, 10)]
+    public float delay = 2f;
+
+    public List<RupeeData> rupeeData;
+
+    private Coroutine m_SpawnRoutine;
+
+    public event EventHandler<RupeeEvent> Spawned;
     
     public event EventHandler<RupeeEvent> RupeeCollected;
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        spawner.Spawned += SpawnedHandler;
-    }
-
+    
     public void StartSpawning()
     {
-        spawner.StartSpawning();
+        m_SpawnRoutine = StartCoroutine(SpawnRoutine());
     }
-
+    
     public void StopSpawning()
     {
-        spawner.StopSpawning();
-    }
-
-    public void Clear()
-    {
-        foreach (Rupee rupee in m_rupees)
+        if (m_SpawnRoutine != null)
         {
-            Destroy(rupee.gameObject);
+            StopCoroutine(m_SpawnRoutine);
+            m_SpawnRoutine = null;
         }
-        
-        m_rupees.Clear();
     }
 
-    private void SpawnedHandler(object sender, RupeeEvent args)
+    private IEnumerator SpawnRoutine()
     {
-        // Get the rupee
-        Rupee rupee = args.Rupee;
+        Spawn();
+        yield return new WaitForSeconds(delay);
+        m_SpawnRoutine = StartCoroutine(SpawnRoutine());
+    }
 
+    private void Spawn()
+    {
+        // Instantiate the rupee
+        Rupee go = Instantiate(rupeePrefab, transform.position, Quaternion.identity);
+        go.transform.parent = container.transform;
+
+        Rupee rupee = go.GetComponent<Rupee>();
+        
+        // Load random data
+        RupeeData data = GetRandomRupeeData();
+        rupee.LoadData(data);
+        
         // Add listener
         rupee.Collectible.Collected += CollectedHandler;
         
         // Add the rupee to the list
-        m_rupees.Add(rupee);
+        m_Rupees.Add(rupee);
+
+        // Dispatch Spawned event
+        OnSpawned(new RupeeEvent(rupee));
+    }
+
+    private RupeeData GetRandomRupeeData()
+    {
+        int index = Random.Range(0, rupeeData.Count);
+        return rupeeData[index];
+    }
+
+    public void Clear()
+    {
+        foreach (Rupee rupee in m_Rupees)
+        {
+            Destroy(rupee.gameObject);
+        }
+        
+        m_Rupees.Clear();
     }
 
     private void CollectedHandler(object sender, EventArgs args)
@@ -60,20 +96,20 @@ public class RupeesManager : MonoBehaviour
             rupee.Collectible.Collected -= CollectedHandler;
 
             // Remove from the list
-            m_rupees.Remove(rupee);
+            m_Rupees.Remove(rupee);
 
             // Dispatch collected event
             OnRupeeCollected(new RupeeEvent(rupee));
         }
     }
+    
+    private void OnSpawned(RupeeEvent e)
+    {
+        Spawned?.Invoke(this, e);
+    }
 
     private void OnRupeeCollected(RupeeEvent e)
     {
         RupeeCollected?.Invoke(this, e);
-    }
-
-    private void OnDestroy()
-    {
-        spawner.Spawned -= SpawnedHandler;
     }
 }
