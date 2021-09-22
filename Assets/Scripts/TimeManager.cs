@@ -10,7 +10,17 @@ public class TimeManager : MonoBehaviour
 
     private bool m_started;
 
-    public event EventHandler<EventArgs> Completed; 
+    public event EventHandler<EventArgs> Completed;
+
+    public string Formated
+    {
+        get
+        {
+            int minutes = Mathf.FloorToInt(m_timeLeft / 60);
+            int seconds = Mathf.FloorToInt(m_timeLeft % 60);
+            return string.Format("{0:00}:{1:00}", minutes, seconds);
+        }
+    }
     
     void Update()
     {
@@ -26,7 +36,7 @@ public class TimeManager : MonoBehaviour
         }
     }
 
-    private void StartCountdown()
+    public void StartCountdown()
     {
         m_timeLeft = totalTime;
         m_started = true;

@@ -16,6 +16,26 @@ public class RupeesManager : MonoBehaviour
         spawner.Spawned += SpawnedHandler;
     }
 
+    public void StartSpawning()
+    {
+        spawner.StartSpawning();
+    }
+
+    public void StopSpawning()
+    {
+        spawner.StopSpawning();
+    }
+
+    public void Clear()
+    {
+        foreach (Rupee rupee in m_rupees)
+        {
+            Destroy(rupee.gameObject);
+        }
+        
+        m_rupees.Clear();
+    }
+
     private void SpawnedHandler(object sender, RupeeEvent args)
     {
         // Get the rupee

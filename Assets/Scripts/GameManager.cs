@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     
     public TimeManager Time { get; private set;  }
     
+    public bool Playing { get; private set; }
+
     public int scoreToWin;
 
     private void Awake()
@@ -35,8 +37,18 @@ public class GameManager : MonoBehaviour
         Time.Completed += TimeCompletedHandler;
     }
 
+    public void StartGame()
+    {
+        Playing = true;
+        Time.StartCountdown();
+        Rupees.StartSpawning();
+    }
 
-        Score.Changed += ScoreChangedHandler;
+    private void StopGame()
+    {
+        Playing = false;
+        Rupees.StopSpawning();
+        Rupees.Clear();
     }
 
     private void ScoreChangedHandler(object sender, EventArgs args)
@@ -51,5 +63,6 @@ public class GameManager : MonoBehaviour
 
     private void TimeCompletedHandler(object sender, EventArgs args)
     {
+        StopGame();
     }
 }

@@ -18,16 +18,27 @@ public class RupeeSpawner : MonoBehaviour
 
     public event EventHandler<RupeeEvent> Spawned;
 
-    void Start()
+    private Coroutine m_spawnRoutine;
+
+    public void StartSpawning()
     {
-        StartCoroutine(SpawnRoutine());
+        m_spawnRoutine = StartCoroutine(SpawnRoutine());
+    }
+    
+    public void StopSpawning()
+    {
+        if (m_spawnRoutine != null)
+        {
+            StopCoroutine(m_spawnRoutine);
+            m_spawnRoutine = null;
+        }
     }
 
     private IEnumerator SpawnRoutine()
     {
         Spawn();
         yield return new WaitForSeconds(delay);
-        StartCoroutine(SpawnRoutine());
+        m_spawnRoutine = StartCoroutine(SpawnRoutine());
     }
 
     private void Spawn()
